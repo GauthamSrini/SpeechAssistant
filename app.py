@@ -7,10 +7,17 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+
 @app.route('/convert', methods=['POST'])
 def convert():
     r = sr.Recognizer()
     text = ""
+
+    if 'audio_data' in request.files:
+        audio_file = request.files['audio_data']
+        with sr.AudioFile(audio_file) as source:
+            audio = r.record(source)
+        text = recognize_speech(r, audio)
 
     if 'use_microphone' in request.form:
         audio = r.listen(sr.Microphone())
