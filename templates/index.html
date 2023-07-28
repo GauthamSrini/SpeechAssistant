@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech to Text Conversion</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lightpink;
+        }
+        .container {
+            max-width: 500px;
+            padding: 20px;
+            border: 3px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow effect to the container border */
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            font-family:'Times New Roman', Times, serif; /* Change the font family */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Add shadow effect to the title text */
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            display: block;
+            width: 150px;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 100px;
+            overflow-y: scroll;
+        }
+        #download-microphone-button {
+            display: block;
+            width: 150px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Speech to Text Conversion</h1>
+
+        <button onclick="startRecognition()">Start</button>
+        <button onclick="stopRecognition()">Stop</button>
+        <div id="result"></div>
+
+        {% if text %}
+            <h2>Text:</h2>
+            <p id="output-text">{{ text }}</p>
+        {% endif %}
+
+        {% if error %}
+            <h2>Error:</h2>
+            <p>{{ error }}</p>
+        {% endif %}
+
+        <a id="download-microphone-button" href="#" onclick="downloadOutput('result', 'microphone_output.txt')">Download Microphone Output</a>
+    </div>
+
+    <script>
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en-US'; // Language for speech recognition
+
+        recognition.onresult = function(event) {
+            const result = event.results[event.results.length - 1];
+            const transcript = result[0].transcript;
+            document.getElementById('result').textContent = transcript;
+        };
+
+        function startRecognition() {
+            recognition.start();
+        }
+
+        function stopRecognition() {
+            recognition.stop();
+        }
+
+        function downloadOutput(elementId, fileName) {
+            const outputText = document.getElementById(elementId).textContent;
+
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(outputText));
+            element.setAttribute('download', fileName);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+    </script>
+</body>
+</html>
+
+
