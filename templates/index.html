@@ -5,6 +5,8 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
+            gap: 30px;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -14,15 +16,29 @@
             background-color: lightblue;
         }
         .container {
+            width: 500px;
+            padding: 20px;
+            border: 5px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px black;
+            background-color: #f9f9f9;
+           
+        }
+        .des {
             max-width: 500px;
             padding: 20px;
             border: 5px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 0 10px black;
             background-color: #f9f9f9;
+            flex-direction: column;
         }
         h1 {
             text-align: center;
+        }
+        h3{
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
         }
         form {
             text-align: center;
@@ -88,6 +104,7 @@
     </style>
 </head>
 <body class="bd">
+    <section>
     <div class="container">
         <h1>Speech to Text Conversion</h1>
         <form method="POST" action="/convert" enctype="multipart/form-data" onsubmit="return validateForm()">
@@ -115,6 +132,15 @@
         <a id="download-microphone-button" href="#" onclick="downloadOutput('result', 'microphone_output.txt')">Download Microphone Output</a>
         
     </div>
+    </section>
+    <section>
+        <div class="des">
+            <h3>This is our simple project in python with flask environment for speech to text translation
+                here we have provided two options as audio file input and microphone for live translation 
+            </h3>
+        </div>
+    </section>
+    
 
     <script>
         const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
