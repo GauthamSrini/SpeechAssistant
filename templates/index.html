@@ -12,9 +12,11 @@
             height: 100vh;
             margin: 0;
         }
-        .bd{
-            background-color: lightblue;
+        .pg1{
+            background-image: url(../pexels-pixabay-235985.jpg);
+
         }
+        
         .container {
             width: 500px;
             padding: 20px;
@@ -28,6 +30,16 @@
             max-width: 500px;
             padding: 20px;
             border: 5px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px black;
+            background-color: #f9f9f9;
+            flex-direction: column;
+        }
+        .tit {
+            max-width: 500px;
+            padding: 20px;
+            border: 5px solid #ccc;
+            margin-bottom: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px black;
             background-color: #f9f9f9;
@@ -104,9 +116,10 @@
     </style>
 </head>
 <body class="bd">
+    <section class="pg1">
     <section>
     <div class="container">
-        <h1>Medical Speech Recognizer</h1>
+        <h1>Speech to Text Conversion</h1>
         <form method="POST" action="/convert" enctype="multipart/form-data" onsubmit="return validateForm()">
             <label for="audio_data">Select an audio file</label>
             <input type="file" name="audio_data" id="audio_data" accept=".wav, .flac, .mp3">
@@ -134,12 +147,12 @@
     </div>
     </section>
     <section>
+        <div class="tit">
+            <h1>Enhancing Efficiency and Accuracy in Transcribing Medical Dictations using Speech-to-Text STT Technology </h1>
+        </div>
         <div class="des">
-            <h3>This project aims to revolutionize medical dictation transcription by leveraging advanced Speech-to-Text (STT) technology.
-                By fine-tuning STT models to handle complex medical terminology and diverse accents,
-                we aim to significantly enhance both accuracy and efficiency. 
-                The project's outcomes will streamline healthcare documentation, improve patient care, 
-                and reduce the administrative burden on healthcare professionals. 
+            <h3>This is our simple project in python with flask environment for speech to text translation
+                here we have provided two options as audio file input and microphone for live translation 
             </h3>
         </div>
     </section>
@@ -202,6 +215,7 @@
             return true;
         }
     </script>
+    </section>
 </body>
 </html>
 
